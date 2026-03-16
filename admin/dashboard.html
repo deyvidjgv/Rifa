@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Rifa — Panel de Administración</title>
+    <meta
+      name="description"
+      content="Panel de administración del sistema de rifas. Gestiona números, clientes y reportes." />
+    <link
+      rel="stylesheet"
+      href="admin.css" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- ──── Header ──── -->
+      <header class="header-admin">
+        <div class="header-left">
+          <h1>
+            <i class="fas fa-crown"></i>
+            Panel Real de Administración
+          </h1>
+        </div>
+        <div class="header-right">
+          <div class="config-precio">
+            <label for="precioConfig">
+              <i class="fas fa-tag"></i>
+              Precio $:
+            </label>
+            <input
+              type="number"
+              id="precioConfig"
+              placeholder="1000"
+              min="0" />
+            <button
+              id="btnGuardarPrecio"
+              class="btn-action btn-save-config">
+              <i class="fas fa-save"></i>
+              Guardar
+            </button>
+          </div>
+          <button
+            id="btnDescargarPdf"
+            class="btn-action btn-pdf"
+            title="Descargar Reporte PDF">
+            <i class="fas fa-file-pdf"></i>
+            Reporte PDF
+          </button>
+          <button
+            id="logoutBtn"
+            class="btn-action btn-logout"
+            title="Cerrar Sesión">
+            <i class="fas fa-sign-out-alt"></i>
+            Cerrar
+          </button>
+        </div>
+      </header>
+
+      <!-- ──── Stats Cards ──── -->
+      <section class="stats-row">
+        <div class="stat-card stat-total">
+          <span class="stat-icon"><i class="fas fa-flag-checkered"></i></span>
+          <div class="stat-info">
+            <span
+              class="stat-value"
+              id="statTotal">
+              0
+            </span>
+            <span class="stat-label">Total Números</span>
+          </div>
+        </div>
+
+        <div class="stat-card stat-disponibles">
+          <span class="stat-icon"><i class="fas fa-clover"></i></span>
+          <div class="stat-info">
+            <span
+              class="stat-value"
+              id="statDisponibles">
+              0
+            </span>
+            <span class="stat-label">Disponibles</span>
+          </div>
+        </div>
+
+        <div class="stat-card stat-reservados">
+          <span class="stat-icon"><i class="fas fa-hourglass-start"></i></span>
+          <div class="stat-info">
+            <span
+              class="stat-value"
+              id="statReservados">
+              0
+            </span>
+            <span class="stat-label">Reservados</span>
+          </div>
+        </div>
+
+        <div class="stat-card stat-vendidos">
+          <span class="stat-icon"><i class="fas fa-fire"></i></span>
+          <div class="stat-info">
+            <span
+              class="stat-value"
+              id="statVendidos">
+              0
+            </span>
+            <span class="stat-label">Vendidos</span>
+          </div>
+        </div>
+
+        <div class="stat-card stat-dinero">
+          <span class="stat-icon"><i class="fas fa-vault"></i></span>
+          <div class="stat-info">
+            <span
+              class="stat-value"
+              id="statDinero">
+              $0
+            </span>
+            <span class="stat-label">Total Recaudado</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ──── Search & Filters ──── -->
+      <section class="controles">
+        <div class="busqueda-admin">
+          <div class="search-wrapper">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
+            <input
+              type="text"
+              id="buscarAdmin"
+              placeholder="Buscar por número o nombre de cliente..." />
+            <button
+              id="btnBuscarNumero"
+              class="btn-search">
+              <i class="fas fa-bolt"></i>
+              Buscar
+            </button>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <button
+            data-filtro="todos"
+            class="active">
+            Todos
+          </button>
+          <button data-filtro="disponible">Disponibles</button>
+          <button data-filtro="reservado">Reservados</button>
+          <button data-filtro="pendiente_pago">Pend. Pago</button>
+          <button data-filtro="vendido">Vendidos</button>
+          <button data-filtro="cancelado">Cancelados</button>
+        </div>
+      </section>
+
+      <!-- ──── Legend ──── -->
+      <section class="leyenda-admin">
+        <span class="leyenda-item">
+          <span
+            class="leyenda-color"
+            style="background: #2ecc71"></span>
+          Disponible
+        </span>
+        <span class="leyenda-item">
+          <span
+            class="leyenda-color"
+            style="background: #f1c40f"></span>
+          Reservado
+        </span>
+        <span class="leyenda-item">
+          <span
+            class="leyenda-color"
+            style="background: #f39c12"></span>
+          Pend. Pago
+        </span>
+        <span class="leyenda-item">
+          <span
+            class="leyenda-color"
+            style="background: #e74c3c"></span>
+          Vendido
+        </span>
+        <span class="leyenda-item">
+          <span
+            class="leyenda-color"
+            style="background: #95a5a6"></span>
+          Cancelado
+        </span>
+      </section>
+
+      <!-- ──── Grid Board ──── -->
+      <section class="grid-section">
+        <div
+          id="gridNumeros"
+          class="grid-board">
+          <!-- Numbers rendered by gridRenderer.js -->
+        </div>
+        <div
+          id="gridPaginacion"
+          class="grid-pagination">
+          <!-- Pagination rendered by gridRenderer.js -->
+        </div>
+      </section>
+
+      <!-- ──── Audit Log ──── -->
+      <section class="historial-section">
+        <h2 class="section-title">📜 Historial de Cambios</h2>
+        <div class="historial-wrapper">
+          <table class="historial-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Número</th>
+                <th>Acción</th>
+                <th>Cambio</th>
+                <th>Usuario</th>
+              </tr>
+            </thead>
+            <tbody id="historialBody">
+              <!-- Rendered by historyService.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- ──── Report Template (Print Only) ──── -->
+    <div
+      id="print-report"
+      class="print-only">
+      <div class="report-header">
+        <h1 id="report-raffle-name">Nombre de la Rifa</h1>
+        <h2 id="report-title">Reporte de Números Vendidos</h2>
+        <div class="report-meta">
+          <p>
+            Fecha:
+            <span id="report-date"></span>
+          </p>
+          <p>
+            Hora:
+            <span id="report-time"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="report-summary">
+        <div class="summary-box">
+          <span class="summary-label">Vendidos</span>
+          <span
+            class="summary-value"
+            id="report-stat-vendidos">
+            0
+          </span>
+        </div>
+        <div class="summary-box">
+          <span class="summary-label">Disponibles</span>
+          <span
+            class="summary-value"
+            id="report-stat-disponibles">
+            0
+          </span>
+        </div>
+        <div class="summary-box">
+          <span class="summary-label">Recaudado</span>
+          <span
+            class="summary-value"
+            id="report-stat-recaudado">
+            $0
+          </span>
+        </div>
+      </div>
+
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="report-table-body">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+
+      <div class="report-footer">
+        <span id="report-footer-date"></span>
+        <span class="page-number"></span>
+      </div>
+    </div>
+
+    <!-- ──── Firebase SDK ──── -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- ──── Data Layer ──── -->
+    <script src="../data/firebase-config.js"></script>
+    <script src="../services/firestoreService.js"></script>
+    <script src="../data/numeros.js"></script>
+
+    <!-- ──── Admin Modules ──── -->
+    <script src="modules/gridRenderer.js"></script>
+    <script src="modules/statsService.js"></script>
+    <script src="modules/historyService.js"></script>
+    <script src="modules/pdfReport.js"></script>
+    <script src="modules/adminDashboard.js"></script>
+  </body>
+</html>

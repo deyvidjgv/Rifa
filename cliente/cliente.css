@@ -1,0 +1,397 @@
+/* ============================================================
+   CLIENTE — Clean Light Theme
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #2d3748;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* ─── Header ───────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 24px 20px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin-bottom: 6px;
+}
+
+header p {
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+
+/* ─── Search ───────────────────────────────────────────────── */
+.buscador {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buscador input {
+  flex: 1;
+  padding: 12px 18px;
+  background: white;
+  border: 1.5px solid #edf2f7;
+  border-radius: 10px;
+  color: #2d3748;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.buscador input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.buscador button {
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+}
+
+.buscador button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* ─── Number Grid ──────────────────────────────────────────── */
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+  max-width: 900px;
+  margin: 0 auto 24px;
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  background: white;
+  border: 1px solid #edf2f7;
+  min-height: 40px;
+}
+
+.numero:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── States ───────────────────────────────────────────────── */
+.disponible {
+  background: #2ecc71;
+  color: white;
+  border-color: #2ecc71;
+}
+
+.reservado {
+  background: #f1c40f;
+  color: white;
+  border-color: #f1c40f;
+}
+
+.pendiente_pago {
+  background: #f39c12;
+  color: white;
+  border-color: #f39c12;
+}
+
+.vendido {
+  background: #e74c3c;
+  color: white;
+  cursor: not-allowed;
+  border-color: #e74c3c;
+}
+
+.cancelado {
+  background: #95a5a6;
+  color: white;
+  cursor: not-allowed;
+  border-color: #95a5a6;
+}
+
+/* Highlighted search result */
+.highlighted {
+  animation: pulse-highlight 1s ease-in-out infinite;
+  box-shadow:
+    0 0 0 3px #f39c12,
+    0 0 15px rgba(243, 156, 18, 0.4) !important;
+  z-index: 3 !important;
+  transform: scale(1.15) !important;
+}
+
+@keyframes pulse-highlight {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px #f39c12,
+      0 0 15px rgba(243, 156, 18, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px #f39c12,
+      0 0 25px rgba(243, 156, 18, 0.6);
+  }
+}
+
+/* ─── Pagination ───────────────────────────────────────────── */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.paginacion button {
+  padding: 8px 14px;
+  border: 1.5px solid #edf2f7;
+  background: white;
+  color: #718096;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.paginacion button:hover {
+  border-color: #3498db;
+  color: #3498db;
+  background: #f8fbfe;
+}
+
+.paginacion button.active {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+/* ─── Legend ────────────────────────────────────────────────── */
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 13px;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.leyenda span:not(.leyenda-item) {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+/* ─── Modal ────────────────────────────────────────────────── */
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  border-top: 4px solid #3498db;
+  animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #2d3748;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 14px;
+  font-weight: 800;
+}
+
+.modal-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-input-group label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.modal input {
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1.5px solid #edf2f7;
+  border-radius: 8px;
+  color: #2d3748;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.modal-botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.modal button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#guardar {
+  flex: 1;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+}
+
+#guardar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+}
+
+#cancelar {
+  background: #f8f9fa;
+  color: #7f8c8d;
+  border: 1px solid #edf2f7;
+}
+
+#cancelar:hover {
+  background: #eee;
+  color: #333;
+}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .numeros {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    padding: 10px;
+  }
+
+  .numero {
+    font-size: 11px;
+    min-height: 34px;
+    padding: 8px 2px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .numeros {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .buscador {
+    flex-direction: column;
+  }
+
+  .leyenda {
+    gap: 10px;
+  }
+}

@@ -1,0 +1,38 @@
+# Netlify Configuration for Raffle System Optimization
+# Ahorro de créditos y optimización de ancho de banda
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[processing]
+  skip_processing = false
+[processing.css]
+  bundle = true
+  minify = true
+[processing.js]
+  bundle = true
+  minify = true
+[processing.html]
+  pretty_urls = true
+[processing.images]
+  compress = true
