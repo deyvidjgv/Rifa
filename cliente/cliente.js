@@ -31,12 +31,15 @@ function mostrarNumeros(pagina) {
         break;
       case 'vendido':
         div.classList.add('vendido');
+        div.innerHTML = `<span>${num.numero}</span><small><i class="fas fa-fire"></i></small>`;
         break;
       case 'cancelado':
         div.classList.add('cancelado');
+        div.innerHTML = `<span>${num.numero}</span><small><i class="fas fa-times-circle"></i></small>`;
         break;
       case 'reservado':
         div.classList.add('reservado');
+        div.innerHTML = `<span>${num.numero}</span><small><i class="fas fa-hourglass-half"></i></small>`;
         break;
       // Legacy support
       case 'apartado':
@@ -111,78 +114,3 @@ inputBuscar.addEventListener('keydown', (e) => {
 
 // iniciar sistema
 mostrarNumeros(1);
-
-// ===== Lógica del Número Ganador =====
-let configRifaGlobal = null;
-let lottieYaMostrado = false; // solo se ejecuta una vez por visita
-
-if (typeof FirestoreService !== 'undefined') {
-  FirestoreService.escucharConfiguracion((config) => {
-    configRifaGlobal = config;
-    renderBannerGanador();
-  });
-}
-
-// Hook llamado desde numeros.js cuando la DB se actualiza
-window.onNumerosActualizados = function (nums) {
-  renderBannerGanador();
-};
-
-function renderBannerGanador() {
-  const banner = document.getElementById('bannerGanador');
-  const numVal = document.getElementById('ganadorNumeroVal');
-  const subtitulo = document.getElementById('ganadorSubtitulo');
-
-  if (
-    !banner ||
-    !configRifaGlobal ||
-    !configRifaGlobal.numeroGanador ||
-    configRifaGlobal.numeroGanador === ''
-  ) {
-    if (banner) banner.style.display = 'none';
-    return;
-  }
-
-  const ganadorNumero = String(configRifaGlobal.numeroGanador);
-  const numObj = (typeof numeros !== 'undefined' ? numeros : []).find(
-    (n) => String(n.numero) === ganadorNumero,
-  );
-
-  if (numVal) numVal.textContent = ganadorNumero;
-  banner.style.display = 'block';
-
-  // Mostrar animación fullscreen solo una vez por visita
-  const overlay = document.getElementById('lottieOverlay');
-  const overlayNum = document.getElementById('overlayNumeroVal');
-  if (overlay && !lottieYaMostrado) {
-    lottieYaMostrado = true;
-    if (overlayNum) overlayNum.textContent = ganadorNumero;
-    overlay.style.display = 'flex';
-    overlay.style.opacity = '1';
-    setTimeout(() => {
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.style.display = 'none';
-      }, 900);
-    }, 5000);
-  }
-
-  if (subtitulo) {
-    if (numObj) {
-      if (numObj.estado === 'vendido') {
-        subtitulo.innerHTML = `¡Felicidades a <strong>${numObj.nombre || 'nuestro cliente'}</strong>!`;
-      } else if (
-        numObj.estado === 'reservado' ||
-        numObj.estado === 'pendiente_pago'
-      ) {
-        subtitulo.innerHTML = `Apartado por <strong>${numObj.nombre || 'alguien'}</strong> (Pendiente de pago).`;
-      } else {
-        subtitulo.textContent =
-          '¡Este número no fue comprado! Sigue participando.';
-      }
-    } else {
-      subtitulo.textContent =
-        '¡Este número no fue comprado! Sigue participando.';
-    }
-  }
-}

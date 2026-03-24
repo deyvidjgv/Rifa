@@ -61,18 +61,10 @@ function abrirModal(numero) {
       return;
     }
 
-    // Find the number and double check availability before proceeding
+    // Find the number
     const num = numeros.find((n) => n.numero === numero);
     if (!num) {
       alert('Número no encontrado');
-      return;
-    }
-
-    if (num.estado !== 'disponible') {
-      alert(
-        '¡Lo sentimos! Este número acaba de ser apartado por otro cliente. Por favor elige uno diferente.',
-      );
-      fondo.remove();
       return;
     }
 

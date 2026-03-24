@@ -28,117 +28,16 @@
   </head>
 
   <body>
-    <!-- ──── LOTTIE FULLSCREEN OVERLAY ──── -->
-    <div
-      id="lottieOverlay"
-      class="lottie-overlay"
-      style="display: none">
-      <dotlottie-wc
-        src="https://lottie.host/d2f5ac1c-5be7-4a06-9ae4-de8595d907d1/iCgntsWMZQ.lottie"
-        autoplay></dotlottie-wc>
-      <div class="lottie-overlay-label">
-        ¡NÚMERO GANADOR!
-        <span id="overlayNumeroVal"></span>
-      </div>
-    </div>
-    <!-- ──── WINNER BANNER ──── -->
-    <div
-      id="bannerGanador"
-      class="banner-ganador"
-      style="display: none">
-      <div class="ganador-content">
-        <i class="fas fa-star ganador-icon-fa"></i>
-        <div class="ganador-text">
-          <h2>
-            ¡EL NÚMERO GANADOR ES EL
-            <span id="ganadorNumeroVal">000</span>
-            !
-          </h2>
-          <p id="ganadorSubtitulo">Buscando ganador...</p>
-        </div>
-        <i class="fas fa-star ganador-icon-fa"></i>
-      </div>
-    </div>
-
-    <header class="dashboard-header">
-      <div class="header-main">
-        <div class="boleta-floating">
-          <div class="boleta-starburst">
-            <div class="starburst-title">
-              VALOR DE
-              <br />
-              BOLETA
-            </div>
-            <div class="starburst-prices">
-              <span>1 X 40.000 $</span>
-              <span>2 X 60.000 $</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="header-titles">
-          <h1 class="main-title">GRAN RIFA DÍA DE LAS MADRES</h1>
-          <h2 class="sub-title">¡Participa por 3 Grandes Premios!</h2>
-        </div>
-
-        <div class="loteria-badge">
-          🎫 Juega con la
-          <strong>Lotería de Boyacá</strong>
-        </div>
-
-        <div class="prizes-container">
-          <div class="prize-card">
-            <div class="prize-image">
-              <img
-                src="../img/prize_cash.png"
-                alt="Sorteo 1.000.000 $" />
-            </div>
-            <div class="prize-info">
-              <span class="prize-amount">1.000.000 $</span>
-              <span class="prize-date">28 de Marzo 2026</span>
-              <span class="prize-detail">*con abonos de 10.000 $*</span>
-            </div>
-          </div>
-          <div class="prize-card">
-            <div class="prize-image">
-              <img
-                src="../img/prize_tv.jpg"
-                alt="Sorteo TV 65" />
-            </div>
-            <div class="prize-info">
-              <span class="prize-amount">TV 65"</span>
-              <span class="prize-date">25 de Abril 2026</span>
-              <span class="prize-detail">*con abonos de 25.000 $*</span>
-            </div>
-          </div>
-          <div class="prize-card highlight">
-            <div class="prize-image">
-              <img
-                src="../img/moto.png"
-                alt="Sorteo Moto GN125" />
-            </div>
-            <div class="prize-info">
-              <span class="prize-amount">MOTO GN125 2027</span>
-              <span class="prize-date">30 de Mayo 2026</span>
-              <span class="prize-detail">*con boleta pagada*</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="disclaimers-container">
-          <div class="boleta-warning-animated">
-            <i class="fas fa-exclamation-circle"></i>
-            <span>BOLETA SIN PAGO TOTAL NO ENTRA EN EL SORTEO</span>
-          </div>
-          <p class="legal-text">
-            * Imágenes de referencia. El premio mayor puede entregarse en
-            efectivo previo acuerdo *
-          </p>
-        </div>
-      </div>
+    <header>
+      <h1>
+        <i class="fas fa-gem"></i>
+        Elige tu Número Ganador
+      </h1>
+      <p>
+        <i class="fas fa-rocket"></i>
+        Selecciona un número del 1 al 1000 y prepárate para ganar
+      </p>
     </header>
-
-    <p class="cta-subtitle">Elige el número Ganador</p>
 
     <section class="buscador">
       <input
@@ -198,11 +97,6 @@
 
     <!-- Components -->
     <script src="../components/modal.js"></script>
-
-    <!-- Lottie Animation -->
-    <script
-      src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.3/dist/dotlottie-wc.js"
-      type="module"></script>
 
     <!-- Client -->
     <script src="cliente.js"></script>
