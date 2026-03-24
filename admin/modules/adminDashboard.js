@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     precioInput.value = configRifa.precioNumero;
   }
 
+  const ganadorInput = document.getElementById('numeroGanadorConfig');
+  if (ganadorInput && configRifa.numeroGanador) {
+    ganadorInput.value = configRifa.numeroGanador;
+  }
+
   // Start audit log listener
   HistoryUI.iniciar();
 
@@ -35,7 +40,56 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupLogout();
   setupPdfButton();
   setupConfigPrecio();
+  setupConfigGanador();
 });
+
+/**
+ * Handle winning number configuration
+ */
+function setupConfigGanador() {
+  const btnGuardar = document.getElementById('btnGuardarGanador');
+  const ganadorInput = document.getElementById('numeroGanadorConfig');
+
+  if (btnGuardar && ganadorInput) {
+    btnGuardar.addEventListener('click', async () => {
+      const nuevoGanador = ganadorInput.value.trim();
+
+      if (
+        nuevoGanador !== '' &&
+        !confirm(
+          `¿Estás seguro de establecer el ${nuevoGanador} como el NÚMERO GANADOR?\n\n¡Esto aparecerá en la pantalla del cliente en vivo!`,
+        )
+      ) {
+        return;
+      }
+
+      const txtOriginal = btnGuardar.innerHTML;
+      btnGuardar.disabled = true;
+      btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+      try {
+        await FirestoreService.actualizarConfiguracion({
+          numeroGanador: nuevoGanador,
+        });
+
+        configRifa.numeroGanador = nuevoGanador;
+
+        if (nuevoGanador === '') {
+          alert('Número ganador retirado correctamente.');
+        } else {
+          alert(
+            `¡El número ${nuevoGanador} ha sido guardado como el Número Ganador!`,
+          );
+        }
+      } catch (error) {
+        alert('Error al guardar el ganador: ' + error.message);
+      } finally {
+        btnGuardar.disabled = false;
+        btnGuardar.innerHTML = txtOriginal;
+      }
+    });
+  }
+}
 
 /**
  * Handle price configuration

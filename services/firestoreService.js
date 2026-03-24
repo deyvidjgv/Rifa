@@ -184,12 +184,27 @@ const FirestoreService = (() => {
     }
   }
 
+  function escucharConfiguracion(callback) {
+    if (typeof configRifaRef === 'undefined') {
+      callback({ precioNumero: 1000, nombreRifa: 'Rifa' });
+      return () => {};
+    }
+
+    configRifaRef.on('value', (snapshot) => {
+      const data = snapshot.val() || { precioNumero: 1000, nombreRifa: 'Rifa' };
+      callback(data);
+    });
+
+    return () => configRifaRef.off();
+  }
+
   return {
     actualizarNumero,
     escucharNumeros,
     escucharHistorial,
     actualizarConfiguracion,
     obtenerConfiguracion,
+    escucharConfiguracion,
     registrarHistorial,
     resetearNumero,
   };
